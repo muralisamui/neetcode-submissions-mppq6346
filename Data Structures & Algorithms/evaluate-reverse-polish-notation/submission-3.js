@@ -1,0 +1,33 @@
+class Solution {
+    /**
+     * @param {string[]} tokens
+     * @return {number}
+     */
+    evalRPN(tokens) {
+        let stack = [];
+
+        for(const char of tokens){
+            if(!isNaN(char)){
+                stack.push(Number(char));
+            }else {
+                let b = stack.pop();
+                let a = stack.pop();
+                switch(char){
+                    case "+" : 
+                        stack.push(a+b);
+                        break;
+                    case "-" : 
+                        stack.push(a-b);
+                        break;
+                    case "*" : 
+                        stack.push(a*b);
+                        break;
+                    case "/" : 
+                        stack.push(Math.trunc(a/b));
+                        break;
+                }
+            }
+        }
+        return stack[0];
+    }
+}
